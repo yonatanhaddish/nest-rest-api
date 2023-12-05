@@ -11,7 +11,7 @@ export class ItemsService {
       qty: 8,
     },
     {
-      id: '1482',
+      id: '14825',
       name: 'Item Two',
       description: 'This is item02',
       qty: 12,
@@ -19,15 +19,35 @@ export class ItemsService {
   ];
 
   findAll(): Item[] {
-    console.log('Test');
     return this.items;
   }
 
   findOne(id: string): Item {
-    this.items.map((item) => {
-      console.log(`id: ${id}`);
-    });
-    console.log('Test');
+    return this.items.find((item) => item.id === id);
+  }
+
+  createItem(createItemDto): void {
+    createItemDto;
+    this.items.push(createItemDto);
+  }
+
+  deleteItem(id: string): void {
+    const index = this.items.indexOf(this.items.find((item) => item.id === id));
+    if (index != -1) {
+      this.items.splice(index, 1);
+    }
+  }
+  updateItem(id: string, updateItemDto): Item {
+    const itemToBeUpdated = this.items.find((item) => item.id === id);
+    console.log(updateItemDto);
+    console.log(itemToBeUpdated);
+
+    itemToBeUpdated.id = Math.floor(Math.random() * 10).toString();
+    itemToBeUpdated.name = updateItemDto.name;
+    itemToBeUpdated.description = updateItemDto.description;
+    itemToBeUpdated.qty = updateItemDto.qty;
+
+    console.log(this.items);
     return;
   }
 }
