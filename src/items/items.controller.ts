@@ -23,16 +23,16 @@ export class ItemsController {
   findOne(@Param() param): Promise<Item> {
     return this.itemsService.findOne(param.id);
   }
-  // @Post()
-  // create(@Body() createItemDto: CreateItemDto): void {
-  //   this.itemsService.createItem(createItemDto);
-  // }
-  // @Delete(':id')
-  // delete(@Param() param): void {
-  //   this.itemsService.deleteItem(param.id);
-  // }
-  // @Put(':id')
-  // update(@Param() param, @Body() updateItemDto: CreateItemDto): void {
-  //   this.itemsService.updateItem(param.id, updateItemDto);
-  // }
+  @Post()
+  create(@Body() CreateItemDto): Promise<Item> {
+    return this.itemsService.createItem(CreateItemDto);
+  }
+  @Delete(':id')
+  delete(@Param('id') id): Promise<Item> {
+    return this.itemsService.deleteItem(id);
+  }
+  @Put(':id')
+  update(@Param() param, @Body() CreateItemDto): Promise<Item> {
+    return this.itemsService.updateItem(param.id, CreateItemDto);
+  }
 }
